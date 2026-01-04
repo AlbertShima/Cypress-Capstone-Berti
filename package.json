@@ -1,0 +1,17 @@
+{
+  "name": "cypress-capstone",
+  "version": "1.0.0",
+  "description": "Production-grade Cypress TypeScript framework",
+  "type": "module",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "cypress run"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "cypress": "^15.8.1",
+    "dotenv": "^17.2.3",
+    "typescript": "^5.9.3"
+  }
+}
