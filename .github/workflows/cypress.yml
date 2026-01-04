@@ -1,16 +1,38 @@
 name: Cypress Tests
 
-on: [push, pull_request]
+on: 
+  push:
+    branches: [main]   # or your default branch
+  pull_request:
 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      # 1. Checkout your repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'   # caches node_modules automatically
 
-      - run: npm ci
-      - run: npx cypress run
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Set environment variables (optional, from GitHub secrets)
+      # If you use a .env file, you can add secrets here instead of committing .env
+      - name: Set environment variables
+        run: |
+          echo "USER_LOGIN=${{ secrets.USER_LOGIN }}" >> $GITHUB_ENV
+          echo "USER_PASSWORD=${{ secrets.USER_PASSWORD }}" >> $GITHUB_ENV
+          echo "apiUrl=http://localhost:3005" >> $GITHUB_ENV
+
+      # 5. Run Cypress tests
+      - name: Run Cypress tests
+        run: npx cypress run
