@@ -1,4 +1,5 @@
 import { apiUrl, retryRequest } from '../utils'
+// @ts-ignore
 
 Cypress.Commands.add(
   'loginByApi',

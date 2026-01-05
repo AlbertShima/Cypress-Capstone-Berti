@@ -20,7 +20,7 @@ Cypress.Commands.add(
       url: apiUrl('/transactions'),
       body: payload,
       headers: {
-        'Accept': 'application/json, text/plain, */*',
+        Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
       },
     }).then((response) => {
@@ -29,6 +29,7 @@ Cypress.Commands.add(
       const transaction = response.body.transaction
       expect(transaction).to.have.property('id')
       expect(transaction).to.have.property('receiverId', payload.receiverId)
+
       return transaction
     })
   }

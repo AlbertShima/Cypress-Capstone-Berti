@@ -1,5 +1,4 @@
 import { SignInPage } from '@pages/signInPage'
-import { TransactionsPage } from '../../pages/transactionsPage'
 
 describe('RWA API - Transactions', () => {
   it('sends money to the first user', () => {
@@ -12,7 +11,7 @@ describe('RWA API - Transactions', () => {
       const receiverId = firstUser.id
 
       // Create a transaction to that user
-      
+
       cy.createTransaction({
         amount: 50,
         note: myDescriptiveNote,
@@ -27,8 +26,8 @@ describe('RWA API - Transactions', () => {
 
     // Login via UI
     const signInPage = new SignInPage()
-    signInPage.visit()   
-    
+    signInPage.visit()
+
     //Login as default user
     signInPage.loginAs('Ashima', '12345')
 
@@ -36,6 +35,12 @@ describe('RWA API - Transactions', () => {
     cy.click_Tab('Mine')
     const transactionsPage = new TransactionsPage()
     transactionsPage.verifyTransaction(myDescriptiveNote)
+
+    //For fun
+    cy.click_MenuItem('Home')
+    cy.click_MenuItem('My Account')
+    cy.click_MenuItem('Bank Accounts')
+
   })
 })
 
