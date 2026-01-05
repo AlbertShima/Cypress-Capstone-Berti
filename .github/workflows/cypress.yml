@@ -9,7 +9,7 @@ on:
 
 jobs:
   cypress-run:
-    runs-on: self-hosted
+    runs-on: [self-hosted, macOS, X64]
 
     steps:
       - name: Checkout repo
