@@ -1,6 +1,6 @@
-# Updated to use self-hosted runner
 name: Cypress Tests
 
+# Trigger workflow on push or PR to main branch
 on:
   push:
     branches: [ main ]
@@ -9,19 +9,40 @@ on:
 
 jobs:
   cypress-run:
-    runs-on: [self-hosted, macOS, X64]
+    # Use your self-hosted Mac runner
+    runs-on: self-hosted
 
     steps:
+      # 1. Checkout the repository
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18.18.2
 
+      # 3. Cache node_modules for faster runs
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 4. Install dependencies
       - name: Install dependencies
         run: npm ci
 
+      # 5. Run Cypress tests
       - name: Run Cypress tests
         run: npx cypress run
+        env:
+          CYPRESS_baseUrl: http://localhost:3000
+          CYPRESS_apiUrl: http://localhost:3005
+          CYPRESS_USER_LOGIN: Ashima
+          CYPRESS_USER_PASSWORD: 12345
