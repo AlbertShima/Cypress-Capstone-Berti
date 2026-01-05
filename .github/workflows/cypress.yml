@@ -8,8 +8,7 @@ on:
 
 jobs:
   cypress-run:
-    # Match your self-hosted runner labels exactly
-    runs-on: [self-hosted, macOS, X64]
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repo
@@ -18,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.18.2
+          node-version: 18
 
       - name: Install dependencies
         run: npm ci
