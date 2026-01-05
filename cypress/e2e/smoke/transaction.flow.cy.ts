@@ -3,7 +3,7 @@ import { TransactionsPage } from '@pages/transactionsPage'
 
 describe('RWA API - Transactions', () => {
   it('sends money to the first user', () => {
-    const myDescriptiveNote = 'Gift from Albert 01'
+    const myDescriptiveNote = 'Gift from Albert 02'
     cy.loginByApi() // login first
 
     //Get all users to find a receiver
