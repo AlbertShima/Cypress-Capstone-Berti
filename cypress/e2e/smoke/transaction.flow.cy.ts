@@ -1,4 +1,5 @@
 import { SignInPage } from '@pages/signInPage'
+import { TransactionsPage } from '@pages/transactionsPage'
 
 describe('RWA API - Transactions', () => {
   it('sends money to the first user', () => {
